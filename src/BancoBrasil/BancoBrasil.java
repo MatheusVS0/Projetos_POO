@@ -8,6 +8,7 @@ public class BancoBrasil {
         //variavel contaBancaria1 e cintaBancaria2
         ContaBancaria contaBancaria1 = new ContaBancaria(); 
         ContaBancaria contaBancaria2 =  new ContaBancaria();
+        Usuario usuario1 = new Usuario();
         /* 
         Uso nas  versões mais atuais da jdk
         var contaBancaria1 = new ContaBancaria();
@@ -47,6 +48,8 @@ public class BancoBrasil {
         contaBancaria1.sacar(input.nextDouble());
         
         System.out.println(contaBancaria1.consultarSaldo());
+        
+        System.out.println(usuario1.visualizarInfo());
     }
     
 }
