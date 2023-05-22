@@ -1,22 +1,55 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package BancoBrasil;
+
+package bancobrasil;
 
 import java.util.Date;
 
-/**
- *
- * @author programador
- */
+
 public class Usuario {
-    String nome = "Matheus"; 
-    String sobrenome = "Vinícius";
-    String telefone= "85998193237";
-    Date dataRegistro = new Date();
+    // Atributos da Classe
+    String nome;
+    String sobrenome;
+    String telefone;
+    private Date dataRegistro = new Date();
     
-    String visualizarInfo(){
-    return String.format("Nome: %s\n Sobrenome: %s \n Telefone: %s \n Data de Registro: %s \n", this.nome,this.sobrenome,this.telefone,this.dataRegistro);
-}
+    
+    String imprimirInfo(){
+    return String.format("nome: %s\n Sobrenome: %s\n Telefone: %s Data Registro: %s",this.nome, this.sobrenome, this.telefone, this.dataRegistro);
+    
+    }
+    public Usuario(){}
+    
+    public Usuario(String n,String s,String t, Usuario p){
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.telefone = telefone;
+    }
+    
+    public String getNome(){
+        return this.nome;
+    }
+    public void setNome(String n){
+        this.nome = n;
+    }
+    
+     public String getSobrenome(){
+        return this.sobrenome;
+    }
+    public void setSobrenome(String s){
+        this.sobrenome = s;
+    }
+    
+     public String getTelefone(){
+        return this.telefone;
+    }
+    public void setTelefone(String t){
+        this.telefone = t;
+    }
+    
+    public Date getDataRegistro(){
+        return this.dataRegistro;
+    }
+    public void setDataRegistro(Date dataRegistro){
+        this.dataRegistro = dataRegistro;
+    }
+    
 }
