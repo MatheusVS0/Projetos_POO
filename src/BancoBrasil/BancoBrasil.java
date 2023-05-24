@@ -1,5 +1,6 @@
 package bancobrasil;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BancoBrasil {
@@ -64,74 +65,97 @@ public class BancoBrasil {
         Usuario user;
         int cc = 0;
         boolean existe = false;
-        Usuario[] users = new Usuario[5];
+        ArrayList<Usuario> users = new ArrayList<>();
+        ArrayList<Gerente> gerentes = new ArrayList<>();
+        GerenteRepository db_gerente = new GerenteRepository();
+        boolean isLogin = false;
+        gerentes = db_gerente.addGerente();
+
         int operacao = 0;
+        int qtdcadastros = 0;
         //1ª tela
-        while (operacao != 3) {
-            System.out.println("- - - BANCO BRASIL - - -\n");
-            System.out.println("1 - Cadastro de Cliente");
-            System.out.println("2 - Cadastro de Conta");
-            System.out.println("3 - Sair");
-            System.out.print("\nSelecione uma operação: ");
-            operacao = input.nextInt();
+        do {
+            System.out.println("- - - SEJA BEM VINDO AO BANCO BRASIL - - -");
+            System.out.print("Login: ");
+            String login = input.next();
+            System.out.print("Password: ");
+            String password = input.next();
 
-            switch (operacao) {
-                case 1:
-                    for (int i = 0; i < users.length; i++) {
-                        user = new Usuario();
-                        System.out.println(" - - - Cadastro de Cliente  - - -\n");
-                        System.out.print("Nome: ");
-                        user.setNome(input.next());
-                        System.out.print("Sobrenome: ");
-                        user.setSobrenome(input.next());
-                        System.out.print("Telefone: ");
-                        user.setTelefone(input.next());
+            for (Gerente g : gerentes) {
+                if (g.getLogin().equals(login) && g.getPassword().equals(password)) {
+                    isLogin = true;
+                }
+            }
+            while (isLogin != true);
 
-                        users[i] = user;
-                    }
-                    cc += 1;
-                    break;
-                case 2:
-                    System.out.println("- - - Cadastro de Conta - - - \n");
-                    System.out.print("Agência: ");
-                    cb.setagencia(input.next());
-                    System.out.print("Conta: ");
-                    cb.setconta(input.next());
-                    if (cc == 0) {
-                        System.out.println("Nenhum cliente cadastrado");
-                    } else {
-                        System.out.println("- - - Clientes Cadastrados- - -");
-                        for (int i = 0; i < users.length; i++) {
-                            System.out.printf("\n%d - %s %s", (i + 1), users[i].getNome(), users[i].getSobrenome());
-                        }
-                        System.out.print("\nSelecione o propretário: ");
-                        int userOpcao = input.nextInt();
-                        for (int i = 0; i < users.length; i++) {
-                            if (userOpcao - 1 == i) {
-                                cb.setproprietario(users[userOpcao - 1]);
-                                existe = true;
-                            }
-                        }
-                        if (existe == false) {
-                            System.out.println("Cliente não existe");
-                            break;
-                        }
-                    }
-
-                    //if (userOpcao == 1) {
-                    //cb.setproprietario(user);
-                    //}
-                    break;
-
-                case 3:
-                    System.out.println("- - - Saída - - -\n");
-                    break;
-                default:
-                    System.out.println("- - - Operacão inválida - - -\n");
-
+            if (isLogin == false) {
+                System.out.println("Login ou senha inválidos");
             }
 
-        }
-    }
+            while (operacao != 3) {
+                System.out.println("- - - BANCO BRASIL - - -\n");
+                System.out.println("1 - Cadastro de Cliente");
+                System.out.println("2 - Cadastro de Conta");
+                System.out.println("3 - Sair");
+                System.out.print("\nSelecione uma operação: ");
+                operacao = input.nextInt();
 
-}
+                switch (operacao) {
+                    case 1:
+                        System.out.println("- - - Cadastro de Clientes - - -");
+                        System.out.print("Quantidade de cadastros: ");
+                        qtdcadastros = input.nextInt();
+                        for (int i = 0; i < qtdcadastros; i++) {
+                            user = new Cliente();
+                            System.out.print("Nome: ");
+                            user.setNome(input.next());
+                            System.out.print("Sobrenome: ");
+                            user.setSobrenome(input.next());
+                            System.out.print("Telefone: ");
+                            user.setTelefone(input.next());
+
+                            users.add(user);
+                        }
+                        cc += 1;
+                        break;
+                    case 2:
+                        System.out.println("- - - Cadastro de Conta - - - \n");
+                        System.out.print("Agência: ");
+                        cb.setagencia(input.next());
+                        System.out.print("Conta: ");
+                        cb.setconta(input.next());
+                        if (cc == 0) {
+                            System.out.println("Nenhum cliente cadastrado");
+                        } else {
+                            System.out.println("- - - Clientes Cadastrados- - -");
+                            for (int i = 0; i < qtdcadastros; i++) {
+                                System.out.printf("\n%d - %s %s", (i + 1), users.get(i).getNome(), users.get(i).getSobrenome());
+                            }
+                            System.out.print("\nSelecione o propretário: ");
+                            int userOpcao = input.nextInt();
+                            for (int i = 0; i < qtdcadastros; i++) {
+                                if (userOpcao - 1 == i) {
+                                    cb.setproprietario(users.get(userOpcao - 1));
+                                    existe = true;
+                                }
+                            }
+                            if (existe == false) {
+                                System.out.println("Cliente não existe");
+                                break;
+                            }
+                        }
+
+                        //if (userOpcao == 1) {
+                        //cb.setproprietario(user);
+                        //}
+                        break;
+
+                    case 3:
+                        System.out.println("- - - Saída - - -\n");
+                        break;
+                    default:
+                        System.out.println("- - - Operacão inválida - - -\n");
+
+                }
+
+            }

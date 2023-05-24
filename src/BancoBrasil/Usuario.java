@@ -9,16 +9,15 @@ public class Usuario {
     String nome;
     String sobrenome;
     String telefone;
-    private Date dataRegistro = new Date();
     
     
-    String imprimirInfo(){
-    return String.format("nome: %s\n Sobrenome: %s\n Telefone: %s Data Registro: %s",this.nome, this.sobrenome, this.telefone, this.dataRegistro);
+    public String imprimirInfo(){
+    return String.format("nome: %s\n Sobrenome: %s\n Telefone: %s",this.nome, this.sobrenome, this.telefone);
     
     }
     public Usuario(){}
     
-    public Usuario(String n,String s,String t, Usuario p){
+    public Usuario(String n,String s,String t){
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.telefone = telefone;
@@ -44,12 +43,6 @@ public class Usuario {
     public void setTelefone(String t){
         this.telefone = t;
     }
-    
-    public Date getDataRegistro(){
-        return this.dataRegistro;
-    }
-    public void setDataRegistro(Date dataRegistro){
-        this.dataRegistro = dataRegistro;
-    }
+     
     
 }
